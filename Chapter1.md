@@ -26,8 +26,8 @@
     public static void main(String[] args) { 
         Chick chick = new Chick();
         System.out.println(chick.name); } }
-```
-OUTPUT: setting field
+    ```
+    OUTPUT: setting field
         setting constructor
         Tiny
 
