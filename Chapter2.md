@@ -17,7 +17,9 @@ double reward = 3 + 2 * --cookies;
         int: Operation performed on full 32 bits.
         long: Operation performed on full 64 bits.  
     --> post-unary (x++/x--) vs pre-unary(++x,--x): the current value of the variable is used in the expression first(i.e y = x++ -> y =x ) then its increment or decrement (x = x +1) >< the increment or decrement is used in the expression first (y =  ++x -> y = x+1), new value is returned (x = x+1)
+
     **NOTE: what is shift operations??**
+    
     - Converting binary bit to decimal: 
         1. In two's complement, the leftmost (most significant) bit is used as the sign bit: 0 indicates a positive number; 1 indicates a negative number
         2. For negative number, to convert it we go through following steps: 
