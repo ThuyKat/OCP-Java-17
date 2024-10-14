@@ -52,7 +52,11 @@ identifiers with $. The compiler uses this symbol for some files.
 * Java code get compiled only once though it's possible to write code that does not run everywhere
 * Compared to C++: more secured since it runs inside JVM, get rid of operator overloading, better at memory management via auto garbage collector. 
 
-# Scope of variable: class variable(static variable outside method, inside a class), local variable(variable inside a method or passed to method as argument), instance variable(non-static variable outside method inside a class)
+# Scope of variable: 
+
+1. class variable: static variable outside method, inside a class,
+2. local variable: variable inside a method or passed to method as argument,
+3. instance variable: non-static variable outside method inside a class
 
     NOTE: Local variables (variables declared within methods) do not receive default values.
 They must be explicitly initialized before use, or the compiler will generate an error.
