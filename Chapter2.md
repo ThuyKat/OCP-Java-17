@@ -52,7 +52,7 @@ double reward = 3 + 2 * --cookies;
     y = true;
     ```
     ```java
-    // 0^0 = 0, 0^1 = 1,1^0 = 0, 1^1 = 0
+    // 0^0 = 0, 0^1 = 1,1^0 = 1, 1^1 = 0
     //0|0 = 0,0|1 =1,1|0 = 1,1|1 =1
     //0&0 = 0,0&1 = 0,1&0 = 0,1&1 =1
     int a = 5;  // 0101 in binary
@@ -74,7 +74,7 @@ double reward = 3 + 2 * --cookies;
 ## Casting
 - Only required when converting to a smaller or narrowing data type -> Primitive type casting is about data size and potential loss of precision. byte → short → int → long → float → double
     NOTE: Using compound assignment operators will lead to safe downcasting as the compiler will auto cast the reusulting value to the data type of the value on the left side of the coumpound operator.
-- Reference type casting is about the inheritance hierarchy and object types. Upcasting in reference type is to treat a child class object as an instance of its parent class. Hence, only methods declared in the parent class are accessible. At runtime, methods' version of child class are selected while variables' version of parent class are selected.Downcasting is to access specific methods/properties of a child class from a parent class reference. If actual object is of parent class, we need to change it to child class type before downcasting. All methods of the child class become accessible. 
+- Reference type casting is about the inheritance hierarchy and object types. Upcasting in reference type is to treat a child class object as an instance of its parent class. Hence, only methods of child class previously declared in the parent class are accessible. At runtime, methods' version of child class are selected while variables' version of parent class are selected.Downcasting is to access specific methods/properties of a child class from a parent class reference. If actual object is of parent class, we need to change it to child class type before downcasting. All methods of the child class become accessible. 
     NOTE: Downcasting should be used with instanceof check to avoid runtime errors. The instanceof operator checks the actual object type, not just the reference type. It returns true for the object's class and all its superclasses.Use instanceof before downcasting to avoid ClassCastException:
     ```java
     if (animal instanceof Dog) {
@@ -97,9 +97,8 @@ for example:
 - The logical operators, (&), (|), and (^), may be applied to both numeric and boolean
 data types
 - When they’re applied to boolean data types, they’re referred to as logical operators. Alternatively, when they’re applied to numeric data types,
-they’re referred to as bitwise operators, as they perform bitwise comparisons of the bits
-that compose the number.
-- AND is only true if both operands are true.Inclusive OR is only false if both operands are false.Exclusive OR is only true if the operands are different.
+they’re referred to as bitwise operators, as they perform bitwise comparisons of the bits that compose the number.
+- AND is only true if both operands are true.Inclusive OR (|) is only false if both operands are false.Exclusive OR(^) is only true if the operands are different.
 ## conditional operator ( short-circuit operator)
 - Different to logical operator: the right side of the expression may never be evaluated if the final result can be determined by the left side of the expression
     -> this is useful in if statement when evaluating both conditions can throw NullPointerException since one condition is used for null-check
