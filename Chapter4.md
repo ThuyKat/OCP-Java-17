@@ -129,4 +129,40 @@
 2. Construct instance of StringBuilder
 - 3 ways to construct a StringBuilder instance : take no argument, take inital string as argument and take capacity number as argument
 3. StringBuilder methods
-- Inspecting String : similar to String, methods include: substring(), indexOf, length, charAt
+- Inspecting String : similar to String, methods include: substring() -> return a string not StringBuilder, indexOf, length, charAt
+- Transform: return a reference to the current StringBuilder
+    - add element at the end : append(String str/int num/char c/etc) 
+    - add element at an index: insert(int index,String str/int num/char c/etc) 
+    - delete element form start index to end index: delete(int startIndex, int endIndex) - not include endIndex [ )
+    - delete element at a specific index: deleteCharAt(int index)
+    - delete element from start index to end index and replace with a new string in the position: replace(int startIndex, int endIndex, String newString) ->  endIndex can be > length of string
+    - reverse string: reverse()
+- Converting to String type: toString()
+- equals() is not implemented on StringBuilder class --> reference point is used to compare objects -> convert using toString() to check for equality of value. 
+4. String pool : collect repetitive string and reuse common ones -> contains literal values and constants appear in your program.
+- If the same string literals are created at compiled time, only one String object is created, hence equalilty. Otherwise even if two strings seems to have equal value at runtime are not actually equal :
+```java
+var x = "Hello World";
+var z = " Hello World".trim();
+System.out.println(x == z); // false
+
+```
+```java
+var x = "Hello World"; // in string pool
+var y = new String("Hello World"); // not in string pool
+System.out.println(x == y); // false
+```
+
+->> tell Java to use string pool if the string is present with intern()
+```java
+var name = "Hello World";
+var name2 = new String("Hello World").intern();
+System.out.println(name == name2); // true
+```
+```java
+15: var first = "rat" + 1; // rat1 in spring pool
+16: var second = "r" + "a" + "t" + "1"; // reuse rat1 from spring pool
+System.out.println(first == second) //true
+
+
+
