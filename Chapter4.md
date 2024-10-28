@@ -163,6 +163,267 @@ System.out.println(name == name2); // true
 15: var first = "rat" + 1; // rat1 in spring pool
 16: var second = "r" + "a" + "t" + "1"; // reuse rat1 from spring pool
 System.out.println(first == second) //true
+```
+## Array
+area of memory on the heap with space for designated number of elements. 
+1. Construct an array
+- definite length
+- all elements known in advance: int[] moreNumbers = new int[] {42, 55, 99}; OR int[] moreNumbers = {42, 55, 99};
+- all of these are valid declaration of array: 
+```java
+int[] numAnimals;
+int [] numAnimals2;
+int []numAnimals3;
+int numAnimals4[];
+int numAnimals5 [];
+```
+Becareful: 
+```java
+int[] ids, types; // create two arrays
+int ids[], types; // one array and one integer
+```
+2. Inspecting array
+ - length: this is not a method like String's method, but a property - it considers how many slots have been allocated in the memory and not the elements of arrays.
+ - equals (): does not look at the elements but only reference of array object
+ - Print out array: Arrays.toString(my_array)
+3. Transforming array
+-  Casting 
+```java
+3: String[] strings = { "stringValue" };
+4: Object[] objects = strings;
+5: String[] againStrings = (String[]) objects;
+6: againStrings[0] = new StringBuilder(); // DOES NOT COMPILE
+7: objects[0] = new StringBuilder(); // Careful! its ok at compile time but throw error at runtime because it's actually String[] as a result of line 4. The Java runtime maintains the actual type of the array (String[] in this case) and performs runtime checks when you try to store elements into it. That's why line 7 compiles (because the compiler only sees Object[]) but fails at runtime (because it's actually still a String[]).
+```
+---> Use ArrayList<>() instead of array initialization so we dont have to specify the type to avoid this issue
+- Sort array: Arrays.sort() -> require importing java.util.Arrays;
+- Search array: array needs to be sorted before searching. 
+```java
+3: int[] numbers = {2,4,6,8};
+4: System.out.println(Arrays.binarySearch(numbers, 2)); // 0
+5: System.out.println(Arrays.binarySearch(numbers, 4)); // 1
+6: System.out.println(Arrays.binarySearch(numbers, 1)); // -1 - should be inserted at index 0, subtract 1 
+7: System.out.println(Arrays.binarySearch(numbers, 3)); // -2 - should be inserted at index 1, negate 1 and subtract 1
+8: System.out.println(Arrays.binarySearch(numbers, 9)); // -5 - should be inserted at index 4, negate 4 and subtract 1
+```
+- Compare two arrays : Arrays.compare(arr1,arr2)
 
+--> first, arr1 and arr2 should be comparable that they are of same type -> otw: DOES NOT COMPLILE
 
+--> negative means array1 < array 2 and positive means otherwise
 
+    - arr1[i ]  vs arr2[i ]
+    - all elements are same -> compare length 
+    - for each compared pair : null< number < uppercase letter < lowercase letter
+        - null is small than any other value
+        - numbers are smaller than letters
+        - uppercase is smaller than lowercase
+- Return the first differ index otw -1 if equal: Arrays.mismatch(arr1,arr2)
+4. Passing array as argument:  using varargs as if it were a normal array -> able to apply array's methods to it such as args.length and args[0 ]. 
+
+## Multidimentional Arrays
+- Declaration:
+```java
+int[][] vars1; // 2D array
+int vars2 [][]; // 2D array
+int[] vars3[]; // 2D array
+int[] vars4 [], space [][]; // a 2D AND a 3D array
+```
+- Create asymmetric array
+```java
+int [][] args = new int[4][];
+args[0] = new int[5];
+args[1] = new int[3];
+```
+## Math APIs
+- Min, max, round, floor, ceil
+- Exponent: pow() -> return double
+- Math.random() -> return double value, 0<=value<1
+## Dates and Times
+We need to import the Java time class:  import java.time.*;
+1.  checking date time
+```java
+System.out.println(LocalDate.now()); // 2024-10-27
+System.out.println(LocalTime.now());//09:13:07.768
+System.out.println(LocalDateTime.now());//2021–10–25T09:13:07.768
+System.out.println(ZonedDateTime.now());//2021–10–25T09:13:07.769–05:00[America/New_York ]
+```
+
+2.  Create date and time
+```java
+var date1 = LocalDate.of(2022, Month.JANUARY, 20);
+var date2 = LocalDate.of(2022, 1, 20);
+var time1 = LocalTime.of(6, 15); // hour and minute
+var time2 = LocalTime.of(6, 15, 30); // + seconds
+var time3 = LocalTime.of(6, 15, 30, 200); // + nanoseconds
+var dateTime1 = LocalDateTime.of(2022, Month.JANUARY, 20, 6, 15, 30);
+var dateTime2 = LocalDateTime.of(date1, time1);
+```
+3.  getting zone
+```java
+var zone = ZoneId.of("US/Eastern");
+```
+
+NOTE: The date and time classes have private constructors along with static methods that return instances. This is known as the factory pattern. Traditional factories are separate classes, but static factory methods are within the class they create. 
+Example : 
+```java
+public class Shop {
+    private String type;
+
+    private Shop(String type) {
+        this.type = type;
+    }
+
+    public static Shop createShoeShop() {
+        return new Shop("shoe");
+    }
+
+    public static Shop createBakeryShop() {
+        return new Shop("bakery");
+    }
+}
+```
+
+4.  Adding/ Go forward in time
+```java
+12: var date = LocalDate.of(2022, Month.JANUARY, 20);
+13: System.out.println(date); // 2022–01–20
+14: date = date.plusDays(2);
+15: System.out.println(date); // 2022–01–22
+16: date = date.plusWeeks(1);
+17: System.out.println(date); // 2022–01–29
+18: date = date.plusMonths(1);
+19: System.out.println(date); // 2022–02–28
+20: date = date.plusYears(5);
+21: System.out.println(date); // 2027–02–28
+```
+NOTE: Java acknowledge leap year. For example, Java realizes that February 29, 2022 does not exist, and it gives us February 28, 2022, instead
+5.  Go backward in time
+```java
+22: var date = LocalDate.of(2024, Month.JANUARY, 20);
+23: var time = LocalTime.of(5, 15);
+24: var dateTime = LocalDateTime.of(date, time);
+25: System.out.println(dateTime); // 2024–01–20T05:15
+26: dateTime = dateTime.minusDays(1);
+27: System.out.println(dateTime); // 2024–01–19T05:15
+28: dateTime = dateTime.minusHours(10);
+29: System.out.println(dateTime); // 2024–01–18T19:15
+30: dateTime = dateTime.minusSeconds(30);
+31: System.out.println(dateTime); // 2024–01–18T19:14:30
+```
+6.  Method chaining
+```java
+var date = LocalDate.of(2024, Month.JANUARY, 20);
+var time = LocalTime.of(5, 15);
+var dateTime = LocalDateTime.of(date, time)
+.minusDays(1).minusHours(10).minusSeconds(30);
+```
+7. Period
+- EPOCH:January 1, 1970, the point from which to calculate number of miliseconds when converting LocalDate and LocalDateTime
+- var period = Period.ofMonths(int num): set a time interval of num month
+            = Period.ofYears(int num)
+            = Period.ofWeeks(int num)
+            =Period.ofDays(int num)
+            =Period.of(int numOfYears,int numOfMonths, int numOfDays) : every n years, n months, n days
+- It's impossible to chain method using Peirod
+- Print out format: example: P1Y2M3D. Java omits any measures that are zero -> System.out.println(Period.ofMonths(3)); -> PM3
+```java
+3: var date = LocalDate.of(2022, 1, 20);
+4: var time = LocalTime.of(6, 15);
+5: var dateTime = LocalDateTime.of(date, time);
+6: var period = Period.ofMonths(1);
+7: System.out.println(date.plus(period)); // 2022–02–20
+8: System.out.println(dateTime.plus(period)); // 2022–02–20T06:15
+9: System.out.println(time.plus(period)); // Exception
+```
+- Period has methods : 
+    - plus(TemporalAmount):  TemporalAmount which includes Period, Duration, ChronoPeriod
+    - plusYears(long),plusMonth(long),plusDays(long)
+    - minus(TemporalAmount)
+    - minusYears(long),minusMonths(long),minusDays(long)
+
+8. Duration : for smaller unit of time 0> it is used with objects that have time. A Duration is stored in hours, minutes, and seconds.
+```java
+var daily = Duration.ofDays(1); // PT24H
+var hourly = Duration.ofHours(1); // PT1H
+var everyMinute = Duration.ofMinutes(1); // PT1M
+var everyTenSeconds = Duration.ofSeconds(10); // PT10S
+var everyMilli = Duration.ofMillis(1); // PT0.001S
+var everyNano = Duration.ofNanos(1); // PT0.000000001S
+```
+NOTE: Duration doesnt have method that take multiple units like Period does
+```java
+7: var date = LocalDate.of(2022, 1, 20);
+8: var time = LocalTime.of(6, 15);
+9: var dateTime = LocalDateTime.of(date, time);
+10: var duration = Duration.ofHours(6); //instead we can use Duration.of(6,ChronoUnit.HOURS) here
+11: System.out.println(dateTime.plus(duration)); // 2022–01–20T12:15
+12: System.out.println(time.plus(duration)); // 12:15
+13: System.out.println(
+14: date.plus(duration)); // UnsupportedTemporalTypeException
+```
+- TemporalUnit: an interface in java.time.temporal package with only one implementation named ChronoUnit. ChronoUnit is an enum that implements the TemporalUnit interface. 
+```java
+var daily = Duration.of(1, ChronoUnit.DAYS);
+var hourly = Duration.of(1, ChronoUnit.HOURS);
+var everyMinute = Duration.of(1, ChronoUnit.MINUTES);
+var everyTenSeconds = Duration.of(10, ChronoUnit.SECONDS);
+var everyMilli = Duration.of(1, ChronoUnit.MILLIS);
+var everyNano = Duration.of(1, ChronoUnit.NANOS);
+```
+NOTE: ChronoUnit also includes some convenient units such as ChronoUnit.HALF_DAYS to
+represent 12 hours.
+--> it can be used to identify duration of time between two Temporal values
+```java
+var one = LocalTime.of(5, 15);
+var two = LocalTime.of(6, 30);
+var date = LocalDate.of(2016, 1, 20);
+System.out.println(ChronoUnit.HOURS.between(one, two)); // 1 - this is a long value, truncate any fractional  value
+System.out.println(ChronoUnit.MINUTES.between(one, two)); // 75
+System.out.println(ChronoUnit.MINUTES.between(one, date)); // DateTimeException
+```
+NOTE: Compare with Duration.between()
+    - Duration.between() returns Duration object, provides a more precise measurement including nanosecond instead of being truncated like ChronoUnit
+    - Can be both positive and negative vs only positive in ChronoUnit
+    - More flexible, since it can extract to hours (toHours()), toMinutes(),toMillis(), getSeconds(),getNano() vs ChronoUnit is only stays in pre-defined time units
+```java
+var now = Instant.now();
+// do something time consuming
+var later = Instant.now();
+var duration = Duration.between(now, later);
+System.out.println(duration.toMillis()); // Returns number milliseconds
+```
+--> it can be used to truncate element of time, for example : seconds
+```java
+LocalTime time = LocalTime.of(3,12,45);
+System.out.println(time); // 03:12:45
+LocalTime truncated = time.truncatedTo(ChronoUnit.MINUTES);
+System.out.println(truncated); // 03:12
+```
+NOTE: Period vs Duration
+- Duration supports LocalTime, LocalDateTime, ZonedDateTime
+- Period supports LocalDate and LocalDateTime, ZonedDateTime
+```java
+var date = LocalDate.of(2022, 5, 25);
+var period = Period.ofDays(1);
+var days = Duration.ofDays(1);
+System.out.println(date.plus(period)); // 2022–05–26
+System.out.println(date.plus(days)); // Unsupported unit: Seconds
+```
+9. When to use Duration and when to use ChronoUnit??
+- Duration allows for more complex time manipulations and calculations. It can be converted to other time units, can have both negative and positive values, provides methods for addition, subtraction, multiplication, and division.(plus(Duration duration),plusDays(long days), plusHours(long hours), plusMinutes(long minutes), plusSeconds(long seconds), plusMillis(long millis), plusNanos(long nanos) )
+```java
+Duration duration1 = Duration.ofHours(2);
+Duration duration2 = Duration.ofMinutes(30);
+Duration result = duration1.plus(duration2); // 2 hours 30 minutes
+```
+- ChronoUnit is simpler for basic time unit conversions and measurements.It is used for simpler whole unit measurement. It doesn't provide these arithmetic operations directly
+
+10. Instant: to run a timer
+```java
+var now = Instant.now();
+// do something time consuming
+var later = Instant.now();
+var duration = Duration.between(now, later);
+System.out.println(duration.toMillis()); // Returns number milliseconds
+```
