@@ -5,7 +5,7 @@
 ## String
 1. Concatenating
 - The addition operator + is evaluated from left to right -> 1 + 2 + "c" -> 3c
-2. Important String methods
+2. Important String methods: ALL RETURNS STRING OBJECT OUTSIDE OF STRING POOL < NOT STRING LITERALS > 
 - String elements are indexted
 - String is immutable 
 - Methods to inspect strings: 
@@ -139,7 +139,9 @@
     - reverse string: reverse()
 - Converting to String type: toString()
 - equals() is not implemented on StringBuilder class --> reference point is used to compare objects -> convert using toString() to check for equality of value. 
-4. String pool : collect repetitive string and reuse common ones -> contains literal values and constants appear in your program.
+##  String pool 
+-  collect repetitive string and reuse common ones -> contains literal values and constants appear in your program.
+- String Pool, also known as the String constant pool, is a special area in Java heap memory where the JVM stores String literals. This mechanism saves memory by avoiding the creation of dupliate String objects. 
 - If the same string literals are created at compiled time, only one String object is created, hence equalilty. Otherwise even if two strings seems to have equal value at runtime are not actually equal :
 ```java
 var x = "Hello World";
@@ -153,12 +155,14 @@ var y = new String("Hello World"); // not in string pool
 System.out.println(x == y); // false
 ```
 
-->> tell Java to use string pool if the string is present with intern()
+->> tell Java to use string pool if the string is present, and add into pool if it is not -->  intern()
 ```java
 var name = "Hello World";
 var name2 = new String("Hello World").intern();
 System.out.println(name == name2); // true
 ```
+--> The intern() method checks if an equal String exists in  the String pool. If it is exist, returns a reference to that pooled String. If it doesnt, add the String to the pool and return a reference to it. 
+
 ```java
 15: var first = "rat" + 1; // rat1 in spring pool
 16: var second = "r" + "a" + "t" + "1"; // reuse rat1 from spring pool
@@ -229,6 +233,7 @@ int vars2 [][]; // 2D array
 int[] vars3[]; // 2D array
 int[] vars4 [], space [][]; // a 2D AND a 3D array
 ```
+NOTE: at least one array size must be provided on right hand side of the assignment.
 - Create asymmetric array
 ```java
 int [][] args = new int[4][];
@@ -419,7 +424,7 @@ Duration result = duration1.plus(duration2); // 2 hours 30 minutes
 ```
 - ChronoUnit is simpler for basic time unit conversions and measurements.It is used for simpler whole unit measurement. It doesn't provide these arithmetic operations directly
 
-10. Instant: to run a timer
+10. Instant: to run a timer -> use Duration.between(now,later)
 ```java
 var now = Instant.now();
 // do something time consuming
@@ -427,3 +432,23 @@ var later = Instant.now();
 var duration = Duration.between(now, later);
 System.out.println(duration.toMillis()); // Returns number milliseconds
 ```
+- ZonedDateTime can be converted into instant: toInstant() -> the Instant returned will turn the time into an Instant of time in GMT and get rids of the time zone.
+- LocalDateTime cannot be converted into instant because zone info is required to convert time into GMT time
+
+11. Daylight Saving Time ->  time changes and offset also changes auto by Java
+
+# Exercise notes
+1. In multi-dimentional array, only the left most dimension is required to be non-zero. For that reason the below 3D array is legal
+
+```java
+Object[][][] cubbies = new Object[3][0][5];
+
+```
+
+2. Best practice: use == for primitive comparisons and equals for object comparisons. Primitive Wrappers classes like Integer, Boolean have overriden equals to compare values. == can be used for object but it compares reference address not the value. 
+    NOTE: for String specifically, == works for String literals though it compares reference addresses. It is because of String pool ( equal literal values lead to same reference address), but it does not work for String objects -> hence for consistency always use equals() instead. 
+
+ADDITIONAL: When to use Wrapper Class?
+    1. Collections only store objects, hence the need for wrapper primitives
+    2. Ability to override equals and hashmap
+    3. Extra methods for manipulating and converting. for example  Integer.parseInt(String str)
