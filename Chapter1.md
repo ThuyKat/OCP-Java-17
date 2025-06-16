@@ -60,9 +60,13 @@ java.util.Date myDate = new java.util.Date();
 
 ```java
 public class Chick {
+    // Step 1: Field initialization
     private String name = "Fluffy";
+
+    // Step 2: Instance initializer block  
     { System.out.println("setting field"); } 
 
+    // Step 3: Constructor execution
     public Chick() {
         name = "Tiny";
         System.out.println("setting constructor"); 
