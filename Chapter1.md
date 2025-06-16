@@ -1,5 +1,7 @@
 # Java Building Blocks - Study Notes
 
+Object in java is an instance of a class, methods are functions inside class and fields are variable inside class. Variables have 3 type: static one inside class which is shared by all instances we call it class variable, non-static one inside class but outside method. We call it instance variable because each instance has a copy of it. Variables inside methods (including parameters passed to functions/constructors and those declared inside) we call local variables. They're local because they exist inside function/constructors only and once the function/constructor completes they're removed by stack management. GC collects objects when instances become unreachable, or program ends. On the data side, we have 8 types of primitive data, when assigned a value will stay on the stack side which is different to reference type of data (object) being stored on the heap side and got collected by garbage collector. We call reference because whenever we assign it to a variable, we pass the address located on the heap and not the actual object. Note that GC only collects unused objects on the heap while stack management handles the stack side. GC is an advantage of Java compared to C++ so it has better memory management, platform independence due to the compiler can convert java into bytecode which is understood by JVM and able to run independently regardless of OS.
+
 ## 🏗️ Java Building Blocks
 
 **Java building blocks are classes/interfaces** (interfaces covered in chapter 5)
