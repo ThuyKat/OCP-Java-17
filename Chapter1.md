@@ -166,7 +166,30 @@ int x, String y;  // Invalid - different types
 
 ### 3. Instance Variable
 - **Non-static variable** outside method, inside a class
-
+Example:
+```java
+    public class Student {
+    // CLASS VARIABLE (static) - shared by ALL students
+    static int totalStudents = 0;
+    
+    // INSTANCE VARIABLES (non-static) - each student has their own
+    String name;
+    int age;
+    
+    public Student(String studentName) {
+        // LOCAL VARIABLE (inside method)
+        int currentYear = 2025;
+        
+        // Assigning to instance variable
+        this.name = studentName;
+        totalStudents++;  // Modifying class variable
+    }
+    
+    public void study(int hours) {  // 'hours' is LOCAL VARIABLE (parameter)
+        int focusLevel = 8;  // LOCAL VARIABLE
+    }
+}
+```
 ---
 
 ## 🔄 var Identifier
