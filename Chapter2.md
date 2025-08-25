@@ -44,6 +44,7 @@ double reward = 3 + 2 * --cookies;
     - Unsigned right shift(>>>):Shifts the bits to the right, always filling the leftmost bits with 0,regardless of whether the number is positive or negative.Does not preserve the sign
     - Logical exclusive (XOR) vs logical inclusive(OR)
       <img width="662" height="637" alt="image" src="https://github.com/user-attachments/assets/866979f9-3416-4f1c-ba86-a6f1505c577e" />
+      <img width="662" height="300" alt="image" src="https://github.com/user-attachments/assets/c7ba930f-8437-4bf7-80ed-6ebcf324b6be" />
 
     ```java
     boolean x = true;
