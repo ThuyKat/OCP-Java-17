@@ -35,6 +35,8 @@ double reward = 3 + 2 * --cookies;
             for example: 
                 int a = 5;  // Binary: 0000 0101
                 int result = a << 2;  // Binary: 0001 0100
+      <img width="669" height="524" alt="image" src="https://github.com/user-attachments/assets/d4f67b68-dc10-47f9-8e02-d02d8f54b521" />
+
     - Signed right shift (>>):Shifts the bits to the right, preserving the sign bit (leftmost bit).For negative numbers, it fills the leftmost bits with 1s. For positive numbers: Fills the leftmost bits with 0. Right shift (>>) is equivalent to dividing by 2^n for positive numbers.
             for example:
                 int a = -8;  // Binary: 1111 1000
