@@ -43,6 +43,8 @@ double reward = 3 + 2 * --cookies;
                 int result = a >> 2;  // Binary: 1111 1110  
     - Unsigned right shift(>>>):Shifts the bits to the right, always filling the leftmost bits with 0,regardless of whether the number is positive or negative.Does not preserve the sign
     - Logical exclusive (XOR) vs logical inclusive(OR)
+      <img width="662" height="637" alt="image" src="https://github.com/user-attachments/assets/866979f9-3416-4f1c-ba86-a6f1505c577e" />
+
     ```java
     boolean x = true;
     boolean y = false;
