@@ -45,6 +45,8 @@ double reward = 3 + 2 * --cookies;
     - Logical exclusive (XOR) vs logical inclusive(OR)
       <img width="662" height="637" alt="image" src="https://github.com/user-attachments/assets/866979f9-3416-4f1c-ba86-a6f1505c577e" />
       <img width="662" height="300" alt="image" src="https://github.com/user-attachments/assets/c7ba930f-8437-4bf7-80ed-6ebcf324b6be" />
+      <img width="662" height="410" alt="image" src="https://github.com/user-attachments/assets/49d657ca-cb22-4a9d-9ed4-0a604ac9c26b" />
+      <img width="662" height="366" alt="image" src="https://github.com/user-attachments/assets/aa624e10-164d-4013-a9cb-84c0514639d9" />
 
     ```java
     boolean x = true;
